@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Unlock Your Class</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.15);
+      --text: #fff;
+      --muted: rgba(255,255,255,.78);
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,.15);
+      --ok: #10b981;
+      --danger: #ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.5);
+      --gold: #f59e0b;
+      --gold-glow: rgba(245,158,11,0.7);
+      --gold-light: #fef3c7;
+      --highlight: #ec4899;
+      --highlight-glow: rgba(236,72,153,0.7);
+      --very-easy: #10b981;
+      --easy: #22c55e;
+      --medium: #f59e0b;
+      --hard: #ef4444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(99,102,241,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(16,185,129,0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a0f 0%, #111827 100%);
+      color: var(--text);
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height: 1.5;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 18px 14px 120px;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 18px 6px 8px;
+    }
+    
+    .logo {
+      width: 110px;
+      height: auto;
+      border-radius: 14px;
+      display: block;
+      margin: 10px auto;
+      border: 2px solid var(--border);
+      box-shadow: 0 0 20px rgba(99,102,241,.3);
+      animation: pulse 3s infinite;
+    }
+    
+    .main-text {
+      text-align: center;
+      color: #fff;
+      margin: 20px 0 10px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    
+    .yo-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .yo-container img {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+    
+    .class {
+      color: #ffcc00;
+      font-weight: 600;
+      text-shadow: 0 0 5px #ffcc00, 0 0 12px rgba(255,204,0,0.6);
+    }
+    
+    .level {
+      color: #4dff4d;
+      font-weight: 600;
+      text-shadow: 0 0 5px #4dff4d, 0 0 12px rgba(77,255,77,0.6);
+    }
+    
+    .sub-text {
+      text-align: center;
+      color: var(--muted);
+      margin: 14px 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .warning {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    
+    .tasks {
+      color: var(--gold-light);
+      text-shadow: 0 0 6px var(--gold-glow);
+      font-weight: 700;
+    }
+    
+    .cta-section {
+      text-align: center;
+      margin: 24px 0;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+    }
+    
+    .cta-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .offers {
+      margin-top: 24px;
+    }
+    
+    .offer {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      backdrop-filter: blur(10px);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      position: relative;
+    }
+    
+    .offer:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    
+    .thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #0e1116;
+      border: 1px solid var(--border);
+      flex: 0 0 68px;
+    }
+    
+    .thumb-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fff;
+    }
+    
+    .meta {
+      display: grid;
+      gap: 6px;
+      flex: 1;
+    }
+    
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .name {
+      font-size: 15px;
+      font-weight: 800;
+    }
+    
+    .badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    
+    .desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.38;
+    }
+    
+    .stars {
+      display: flex;
+      gap: 2px;
+      margin-top: 3px;
+      opacity: .95;
+    }
+    
+    .star {
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 50% 35%, #fff, #ffd76a 60%, #caa13c 100%);
+      -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
+      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
+    }
+    
+    .offer:nth-of-type(1)::after {
+      content: "VERY EASY";
+      color: var(--very-easy);
+      border-color: var(--very-easy);
+      background: rgba(16,185,129,.18);
+    }
+    
+    .offer:nth-of-type(2)::after {
+      content: "EASY";
+      color: var(--easy);
+      border-color: var(--easy);
+      background: rgba(34,197,94,.18);
+    }
+    
+    .offer:nth-of-type(3)::after {
+      content: "MEDIUM";
+      color: var(--medium);
+      border-color: var(--medium);
+      background: rgba(245,158,11,.18);
+    }
+    
+    .offer:nth-of-type(1)::after,
+    .offer:nth-of-type(2)::after,
+    .offer:nth-of-type(3)::after {
+      position: absolute;
+      right: 12px;
+      top: -8px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid;
+      backdrop-filter: blur(6px);
+    }
+    
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3,4,27,.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 1000;
+    }
+    
+    .overlay.show {
+      display: flex;
+    }
+    
+    .modal {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(10,10,15,.85);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      color: #fff;
+      animation: modalSlideIn 0.3s ease-out;
+      overflow: hidden;
+    }
+    
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.5);
+    }
+    
+    .modal-title {
+      font-weight: 800;
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    .modal-body {
+      padding: 20px 16px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--muted);
+      text-align: center;
+    }
+    
+    .instruction {
+      color: var(--highlight);
+      font-weight: 700;
+      font-size: 18px;
+      text-shadow: 0 0 10px var(--highlight-glow);
+      margin: 15px 0;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(236,72,153,0.1);
+      border: 1px solid rgba(236,72,153,0.3);
+      animation: pulseHighlight 2s infinite;
+    }
+    
+    .modal-actions {
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 0;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 16px;
+    }
+    
+    .btn-ok {
+      background: var(--ok);
+      color: #00160a;
+      box-shadow: 0 4px 15px rgba(23, 201, 100, 0.3);
+    }
+    
+    .btn-ok:hover {
+      background: #15b357;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(23, 201, 100, 0.4);
+    }
+    
+    .btn-close {
+      background: #333;
+      color: #fff;
+      margin-top: 0;
+    }
+    
+    .btn-close:hover {
+      background: #444;
+    }
+    
+    .err {
+      color: var(--danger);
+      background: rgba(255,107,107,.12);
+      border: 1px solid rgba(255,107,107,.3);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+    
+    a.clean {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    @keyframes goldBlink {
+      0%, 100% {
+        color: var(--gold);
+        text-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold-glow);
+      }
+      50% {
+        color: var(--gold-light);
+        text-shadow: 0 0 12px var(--gold), 0 0 28px rgba(255,215,0,1);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes pulseHighlight {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(236,72,153,0.3);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(236,72,153,0.6);
+      }
+    }
+    
+    .gold-text {
+      animation: goldBlink 1.2s infinite;
+      color: var(--gold);
+      text-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold-glow);
+    }
+    
+    .footer-note {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+    
+    .instruction-title {
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    .app-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <img src="https://i.imgur.com/SYt9D3P.png" alt="Class Unlock" class="logo" />
+      
+      <p class="main-text">
+        <span class="yo-container">Yo <img src="https://media.tenor.com/52M2P0XtgQUAAAAj/roblox-dance.gif" alt="Roblox Dance" /></span><br>
+        To get your <span class="class">Class</span> in your account<br>
+        Just complete <span class="level">1 small task</span>
+      </p>
+      
+      <p class="sub-text">
+        <span class="warning">Click on <span class="tasks">ANY TASK YOU LIKE</span> below</span>
+      </p>
+    </div>
+
+    <div id="err" class="err" style="display:none">Could not load offers. Please refresh and try again.</div>
+    <div id="offers" class="offers" aria-live="polite"></div>
+    
+    <div class="footer-note">
+      Complete any task to unlock your class
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div class="modal-title">
+          <strong>
+            To Get Your
+            <span class="gold-text">Class</span>
+            <span style="color: #ffcc00; text-shadow: 0 0 8px #ffcc00, 0 0 16px rgba(255,204,0,0.8);">👇</span>
+          </strong>
+        </div>
+      </div>
+      <div id="mDesc" class="modal-body">
+        <div class="instruction-title">Follow these instructions:</div>
+        <div id="instructionText" class="instruction"></div>
+        <p>Complete this task to unlock your class!</p>
+      </div>
+      <div class="modal-actions">
+        <a id="mOk" class="btn btn-ok clean" target="_blank" rel="noopener">START TASK</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // AdBluMedia API configuration
+    const ADBLU_USER_ID = '705486';
+    const ADBLU_API_KEY = '3f77ccd539495b1de5d31ccf19649e3a';
+    const ADBLU_PUBLIC_KEY = '45db02a7e8d8efbcc40f';
+    const FEED_BASE = 'https://dbj3fg9om9jaj.cloudfront.net/public/offers/feed.php';
+
+    // Optional passthrough: ?s1=...&s2=...
+    const qp = new URLSearchParams(location.search);
+    const s1 = qp.get('s1') || '';
+    const s2 = qp.get('s2') || '';
+
+    function jsonp(url, param='callback'){
+      return new Promise((resolve,reject)=>{
+        const cb='cb_'+Math.random().toString(36).slice(2);
+        const s=document.createElement('script');
+        s.src=url+(url.includes('?')?'&':'?')+encodeURIComponent(param)+'='+encodeURIComponent(cb);
+        s.async=true; let done=false;
+        window[cb]=(data)=>{ if(done) return; done=true; resolve(data); cleanup(); };
+        s.onerror=()=>{ if(done) return; done=true; reject(new Error('JSONP error')); cleanup(); };
+        function cleanup(){ try{ delete window[cb]; }catch(_){ window[cb]=undefined; } s.remove(); }
+        document.head.appendChild(s);
+      });
+    }
+
+    function buildFeedUrl(){
+      const u=new URL(FEED_BASE);
+      u.searchParams.set('user_id', ADBLU_USER_ID);
+      u.searchParams.set('api_key', ADBLU_API_KEY);
+      if(s1) u.searchParams.set('s1', s1);
+      if(s2) u.searchParams.set('s2', s2);
+      return u.toString();
+    }
+
+    function normalize(offer, index){
+      return {
+        id: offer.id || offer.offer_id || Math.random().toString(36).slice(2),
+        name: offer.anchor || offer.name || 'Offer',
+        instructions: offer.conversion || offer.description || 'Follow the steps on the next page.',
+        url: offer.url,
+        icon: (
+          offer.icon || offer.icon_url ||
+          offer.image || offer.image_url ||
+          offer.offer_image || offer.thumbnail || offer.thumb || offer.logo || null
+        ),
+        difficulty: index
+      };
+    }
+
+    function starRow(){
+      const row=document.createElement('div'); row.className='stars';
+      for(let i=0;i<4;i++){ const s=document.createElement('span'); s.className='star'; row.appendChild(s); }
+      return row;
+    }
+
+    function openModal(desc, href){
+      document.getElementById('instructionText').textContent = desc || 'Follow the instructions on the next page.';
+      const ok=document.getElementById('mOk'); ok.href = href || '#';
+      document.getElementById('overlay').classList.add('show');
+      document.getElementById('overlay').setAttribute('aria-hidden','false');
+    }
+    
+    function closeModal(){
+      document.getElementById('overlay').classList.remove('show');
+      document.getElementById('overlay').setAttribute('aria-hidden','true');
+    }
+    
+    const closeBtn = document.getElementById('mClose'); if (closeBtn) closeBtn.onclick = closeModal;
+    document.getElementById('overlay').addEventListener('click',(e)=>{ if(e.target.id==='overlay') closeModal(); });
+
+    function render(list){
+      const root=document.getElementById('offers'); root.innerHTML='';
+      list.slice(0,3).forEach((raw, index)=>{
+        const o=normalize(raw, index); if(!o.url) return;
+        const card=document.createElement('div'); card.className='offer'; card.onclick=()=>openModal(o.instructions,o.url);
+        const numEl=document.createElement('div');
+        numEl.className='thumb thumb-num';
+        numEl.textContent=String(index+1);
+        const meta=document.createElement('div'); meta.className='meta';
+        const row=document.createElement('div'); row.className='row';
+        const name=document.createElement('div'); name.className='name'; name.textContent=o.name;
+        const badge=document.createElement('div'); badge.className='badge'; badge.textContent='Free';
+        row.appendChild(name); row.appendChild(badge);
+        const desc=document.createElement('div'); desc.className='desc'; desc.textContent=o.instructions;
+        meta.appendChild(row); meta.appendChild(desc); meta.appendChild(starRow());
+        card.appendChild(numEl); card.appendChild(meta); root.appendChild(card);
+      });
+      if(!root.children.length){ const empty=document.createElement('div'); empty.className='desc'; empty.style.textAlign='center'; empty.textContent='No offers available right now.'; root.appendChild(empty); }
+    }
+
+    (async function init(){
+      try{
+        const data = await jsonp(buildFeedUrl(), 'callback');
+        if(!Array.isArray(data)) throw new Error('Unexpected response');
+        render(data);
+      }catch(err){
+        console.error(err);
+        document.getElementById('err').style.display='block';
+      }
+    })();
+  </script>
+</body>
+</html>
