@@ -329,6 +329,40 @@
       color: #fff;
       animation: modalSlideIn 0.3s ease-out;
       overflow: hidden;
+      position: relative;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 56px;
+      height: 56px;
+      background: transparent;
+      border: 0;
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 12px 16px 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s ease, transform .15s ease, opacity .15s ease;
+      opacity: .95;
+      z-index: 1;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255,255,255,.12);
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    
+    .close-btn:focus {
+      outline: 2px solid rgba(255,255,255,.6);
+      outline-offset: 2px;
     }
     
     @keyframes modalSlideIn {
@@ -349,6 +383,7 @@
       padding: 18px 16px;
       border-bottom: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.5);
+      position: relative;
     }
     
     .modal-title {
@@ -529,6 +564,7 @@
   <!-- Modal -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
+      <button id="mClose" class="close-btn" aria-label="Close dialog" title="Close">✕</button>
       <div class="modal-head">
         <div class="modal-title">
           <strong>
@@ -539,9 +575,7 @@
         </div>
       </div>
       <div id="mDesc" class="modal-body">
-        <div class="instruction-title">Follow these instructions:</div>
         <div id="instructionText" class="instruction"></div>
-        <p>Complete this task to unlock your class!</p>
       </div>
       <div class="modal-actions">
         <a id="mOk" class="btn btn-ok clean" target="_blank" rel="noopener">START TASK</a>
@@ -573,6 +607,8 @@
         document.head.appendChild(s);
       });
     }
+
+    
 
     function buildFeedUrl(){
       const u=new URL(FEED_BASE);
